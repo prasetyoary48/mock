@@ -1,0 +1,36 @@
+<h1>Dashboard</h1>
+    <h2>To Do List:</h2>
+    <form action="/dashboard/addtodo" method="post">
+        <label for="newTodo">Tambah To do:</label>
+        <input type="text" id="newTodo" name="newTodo" required>
+        <button type="submit">Tambah</button>
+    </form>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>To do</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% todos.forEach(todo => { %>
+                <tr>
+                <td><%= todo.id %></td>
+                <td><%= todo.toDo %></td>
+                <td>
+                    <% if (todo.status) { %>
+                    Selesai
+                    <% } else { %>
+                    Belum Selesai
+                    <% } %>
+                </td>
+                <td>
+                    <form action="/dashboard/updatestatus/<%= todo.id %>" method="post">
+                    <button type="submit">Ubah Status</button>
+                    </form>
+                </td>
+                </tr>
+            <% }); %>
+        </tbody>
+    </table> 
