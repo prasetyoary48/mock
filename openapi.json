@@ -1,8 +1,8 @@
 {
     "openapi": "3.0.3",
     "info": {
-      "title": "Bank System Documentation - OpenAPI 3.0",
-      "description": "Dokumentasi API Bank System",
+      "title": "To do lists Documentation - OpenAPI 3.0",
+      "description": "Dokumentasi API to do list",
       "version": "1.0.11"
     },
     "servers": [
@@ -20,12 +20,12 @@
         "description": "For Users"
       },
       {
-        "name": "Bank_accounts",
-        "description": "For Bank Accounts"
+        "name": "Todo",
+        "description": "For To do lists"
       }
     ],
     "paths": {
-      "/register": {
+      "/auth/register": {
         "post": {
           "tags": [
             "Auth"
@@ -45,7 +45,7 @@
                     "email": {
                       "type": "string"
                     },
-                    "password": {
+                    "pin": {
                       "type": "string"
                     }
                   }
@@ -81,7 +81,7 @@
           }
         }
       },
-      "/login": {
+      "/auth/login": {
         "post": {
           "tags": [
             "Auth"
@@ -98,7 +98,7 @@
                     "email": {
                       "type": "string"
                     },
-                    "password": {
+                    "pin": {
                       "type": "string"
                     }
                   }
@@ -135,7 +135,7 @@
         }
       },
       
-      "/api/v2/users": {
+      "/api/users": {
         "get": {
           "tags": [
             "Users"
@@ -191,17 +191,17 @@
                     "name": {
                       "type": "string"
                     },
-                    "password": {
+                    "pin": {
                       "type": "string"
                     },
-                    "identity_number": {
+                    "toDo": {
+                      "type": "string"
+                    },
+                    "status": {
+                      "type": "boolean"
+                    },
+                    "userId": {
                       "type": "integer"
-                    },
-                    "address": {
-                      "type": "string"
-                    },
-                    "identity_type": {
-                      "type": "string"
                     }
                   }
                 }
@@ -236,7 +236,7 @@
           }
         }
       },
-      "/api/v2/users/{id}": {
+      "/api/users/{id}": {
         "get": {
           "tags": [
             "Users"
@@ -283,16 +283,16 @@
         }
       },
      
-      "/v2/bank_accounts": {
+      "/api/todolist": {
         "get": {
           "tags": [
-            "Bank_accounts"
+            "Todo"
           ],
-          "summary": "Get bank accounts",
-          "description": "Endpoint to get user bank accounts.",
+          "summary": "Get to do lists",
+          "description": "Endpoint to get to do list.",
           "responses": {
             "200": {
-              "description": "Bank accounts retrieved successfully",
+              "description": "To do list retrieved successfully",
               "content": {
                 "application/json": {
                   "schema": {
@@ -322,10 +322,10 @@
         },
         "post": {
           "tags": [
-            "Bank_accounts"
+            "Todo"
           ],
-          "summary": "Create bank account",
-          "description": "Endpoint for create bank account",
+          "summary": "Create to do list",
+          "description": "Endpoint for create to do list",
           "requestBody": {
             "required": true,
             "content": {
@@ -333,14 +333,11 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "bank_name": {
+                    "toDo": {
                       "type": "string"
                     },
-                    "account_number": {
-                      "type": "integer"
-                    },
-                    "balance": {
-                      "type": "number"
+                    "status": {
+                      "type": "boolean"
                     },
                     "userId": {
                       "type": "integer"
@@ -352,7 +349,7 @@
           },
           "responses": {
             "200": {
-              "description": "Create bank account successfully",
+              "description": "Create to do list successfully",
               "content": {
                 "application/json": {
                   "schema": {
@@ -378,13 +375,13 @@
           }
         }
       },
-      "/v2/bank_accounts/{id}": {
+      "/api/todolist/{id}": {
         "get": {
           "tags": [
-            "Bank_accounts"
+            "Todo"
           ],
-          "summary": "Get bank account by ID",
-          "description": "Endpoint to get a bank account by its ID.",
+          "summary": "Get to do list by ID",
+          "description": "Endpoint to get a to do list by its ID.",
           "parameters": [
             {
               "name": "id",
@@ -393,12 +390,12 @@
               "schema": {
                 "type": "string"
               },
-              "description": "ID of the bank account to retrieve."
+              "description": "ID of the to do list to retrieve."
             }
           ],
           "responses": {
             "200": {
-              "description": "Bank account retrieved successfully",
+              "description": "To do list retrieved successfully",
               "content": {
                 "application/json": {
                   "schema": {
@@ -424,6 +421,7 @@
           }
         }
       }
+      
     }
     
     
