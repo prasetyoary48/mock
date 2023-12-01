@@ -45,6 +45,12 @@ module.exports = {
 
     async register(req, res){
         const { email, name, pin } = req.body;
+        if (!isNaN(pin) && pin.length !== 6) {
+            return res.status(400).json({
+                status: 'Fail!',
+                message: 'PIN harus berupa angka dengan panjang 6 digit.'
+            });
+        }
         const user = await prisma.user.findFirst({
             where: { email }
         })
@@ -77,6 +83,10 @@ module.exports = {
         const user = await prisma.user.findFirst({
             where: { email }
         })
+        if (!isNaN(pin) || pin.length !== 6) {
+            req.flash("error","PIN harus berupa angka dengan panjang 6 digit.")
+            return res.redirect('/register')
+        }
         
         if(user){
             req.flash("error","Email sudah terdaftar!")
